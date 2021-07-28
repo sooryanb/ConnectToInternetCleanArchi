@@ -1,0 +1,3 @@
+rootProject.name = "CornetExample"
+include ':app'
+include ':core'
