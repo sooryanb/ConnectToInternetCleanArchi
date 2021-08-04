@@ -1,4 +1,4 @@
-package com.example.cornetexample.framework.presentation
+package com.example.cornetexample.todolist.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +7,11 @@ import android.view.animation.AlphaAnimation
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cornetexample.R
-import com.example.cornetexample.Todo
+import com.example.cornetexample.todolist.domain.model.TodoEntity
 
 
 class TodoItemAdapter(
-    private var todoItems: List<com.example.core.data.Todo>,
+    private var todoItems: List<TodoEntity>,
 ): RecyclerView.Adapter<TodoItemAdapter.TodoItemViewHolder>() {
 
     inner class TodoItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)

@@ -4,16 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.cornetexample.Todo
+import com.example.cornetexample.todolist.data.TodoListDao
+import com.example.cornetexample.todolist.domain.model.TodoEntity
 
 
 @Database(
-    entities = [Todo::class, TodoEntity::class],
-    version = 5,
+    entities = [TodoEntity::class],
+    version = 6,
     exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
-    abstract val todoDoa: TodoDao
+
+    abstract val todoList: TodoListDao
 
     companion object{
 
