@@ -1,13 +1,8 @@
 package com.example.cornetexample
 
-import com.example.core.usecases.AddTodo
-import com.example.core.usecases.GetAllTodo
-import com.example.core.usecases.GetTodo
-import com.example.core.usecases.RemoveTodo
 
-data class UseCase(
-    val addTodo: AddTodo,
-    val getAllTodo: GetAllTodo,
-    val getTodo: GetTodo,
-    val removeTodo: RemoveTodo
+
+data class NewUseCase(
+    val addTodo: com.example.cornetexample.todolist.domain.usecase.AddTodo,
+    val getAllTodo: com.example.cornetexample.todolist.domain.usecase.GetAllTodo
 )
