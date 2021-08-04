@@ -1,12 +1,14 @@
-package com.example.cornetexample.framework.db
+package com.example.cornetexample.todolist.data
 
 import androidx.room.*
-import com.example.cornetexample.Todo
+import com.example.cornetexample.core.data.BaseDao
+import com.example.cornetexample.todolist.domain.model.TodoEntity
 
 @Dao
-interface TodoDao {
+interface TodoListDao: BaseDao<TodoEntity> {
+
     @Insert
-    fun insertAll(todos: List<Todo>)
+    fun insertAll(todos: List<TodoEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllTodoEntity(todos: List<TodoEntity>)
@@ -19,9 +21,8 @@ interface TodoDao {
 
     @Query("select * from todo_entity")
     suspend fun getAllTodoEntities(): List<TodoEntity>
-    //TODO: Make this live data
-
 
     @Delete
     suspend fun deleteTodoEntity(todo: TodoEntity)
+
 }
