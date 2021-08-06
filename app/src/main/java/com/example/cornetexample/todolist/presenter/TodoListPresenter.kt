@@ -17,17 +17,20 @@ class TodoListPresenter(private var view: TodoListView?, application: Applicatio
     private val mainScope = CoroutineScope(Dispatchers.Main)
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
+    private val newUseCase = NewUseCase(
+        AddTodo(repository),
+        GetAllTodo(repository)
+    )
+
     init {
         ioScope.launch {
-            repository.getAllFromRemote()
             loadDataFromDB()
         }
     }
 
     private fun loadDataFromDB() {
         mainScope.launch {
-            val todoList = repository.localRepository.getAll()
-            Log.d("TODO_DATA", "$todoList")
+            val todoList =  newUseCase.getAllTodo()
             if (todoList.isNotEmpty()) {
                 view?.hideProgress()
                 view?.loadTodoData(todoList)

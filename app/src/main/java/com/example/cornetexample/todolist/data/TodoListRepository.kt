@@ -18,26 +18,19 @@ class TodoListRepository(context: Context): BaseRepository<TodoEntity>() {
         remoteRepository = TodoListRemoteRepository()
     }
 
-    private val newUseCase = NewUseCase(
-        AddTodo(this),
-        GetAllTodo(this)
-    )
-
 
     override suspend fun add(item: TodoEntity) = localRepository.add(item)
 
     override suspend fun get(id: Long): TodoEntity? = localRepository.get(id)
 
-    override suspend fun getAll(): List<TodoEntity> = localRepository.getAll()
+    override suspend fun getAll(): List<TodoEntity> =
+        withContext(Dispatchers.IO){
+            val todos = remoteRepository.getAll()
+            for (todo in todos)
+                localRepository.add(todo)
+            localRepository.getAll()
+        }
 
     override suspend fun remove(item: TodoEntity) = localRepository.remove(item)
-
-    suspend fun getAllFromRemote() {
-        withContext(Dispatchers.IO){
-            val todoList = remoteRepository.getAll()
-            for(todo in todoList)
-                newUseCase.addTodo(todo)
-        }
-    }
 
 }
