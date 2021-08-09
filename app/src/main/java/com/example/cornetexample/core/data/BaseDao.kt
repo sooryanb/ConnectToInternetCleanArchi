@@ -12,9 +12,6 @@ interface BaseDao<T> where T: BaseModel {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(t: T)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(tList: Iterable<T>)
-
     @Delete
     suspend fun delete(t: T)
 
