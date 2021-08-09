@@ -11,4 +11,11 @@ class TodoListLocalRepository(private val todoDao: TodoListDao): LocalRepository
     override suspend fun getAll(): List<TodoEntity> = todoDao.getAllTodoEntities()
 
     override suspend fun remove(item: TodoEntity) = todoDao.deleteTodoEntity(item)
+
+    suspend fun searchTodoList(searchString: String): List<TodoEntity> = todoDao.searchTodo(searchString)
+
+    suspend fun updateTodo(todo: TodoEntity) = todoDao.updateTodo(todo)
+
+    suspend fun isCompleted(status: Boolean) = todoDao.isCompleted(status)
+
 }

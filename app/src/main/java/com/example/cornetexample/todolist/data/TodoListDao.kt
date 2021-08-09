@@ -25,4 +25,13 @@ interface TodoListDao: BaseDao<TodoEntity> {
     @Delete
     suspend fun deleteTodoEntity(todo: TodoEntity)
 
+    @Query("select * from todo_entity where title like :searchStr")
+    suspend fun searchTodo(searchStr: String): List<TodoEntity>
+
+    @Update
+    fun updateTodo(todo: TodoEntity)
+
+    @Query("select * from todo_entity where completed = :status")
+    fun isCompleted(status: Boolean): List<TodoEntity>
+
 }
